@@ -7,14 +7,17 @@
   [[x y]]
   [x (min (q/height) (inc y))])
 
+
 (defn wiggle
   [[x y]]
   [(+ (rand-nth [-1 0 1 1]) x) y])
 
+
 (defn make-trees
   [n]
-  (->> (repeatedly n (fn [] {:pos [(+ 25 (rand (- (q/width) 50)))
-                                   (+ 120 (rand 60))]}))
+  (->> (fn [] {:pos [(+ 25 (rand (- (q/width) 50)))
+                     (+ 120 (rand 60))]})
+    (repeatedly n)
     (sort-by #(get-in % [:pos 1]))))
 
 
@@ -32,9 +35,8 @@
 (defn step-snow
   [flakes]
   (->> flakes
-    (mapv (fn [flake]
-            #_(.log js/console (:y flake))
-            (update flake :pos (comp down wiggle))))
+    (map (fn [flake]
+           (update flake :pos (comp down wiggle))))
     (concat (make-flakes (rand 1)))
     (melt-flakes)))
 

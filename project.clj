@@ -36,6 +36,6 @@
                                             {:source-paths ["src"]
                                              :compiler
                                              {:output-to "web/js/main.js"
-                                              :externs ["processing.js"]
+                                              :externs ["externs/processing.js"]
                                               :optimizations :advanced
                                               :pretty-print false}}}}}})
